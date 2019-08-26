@@ -1,0 +1,53 @@
+nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 1.7rem;
+  z-index: 5;
+}
+
+.routes{
+  display: flex;
+  flex-flow: row wrap;
+
+  a{
+    text-transform: uppercase;
+    display: inline-block;
+    color: rgb(0, 0, 0, .9);
+    text-decoration: none;
+    font-size: .8rem;
+    margin: .5rem 1rem;
+    &.active{
+      text-decoration: underline;
+    }
+  }
+}
+
+.banner{
+  min-width: 120px;
+}
+
+.subject{
+  padding: 0 1rem;
+  width: fit-content;
+  color: rgb(0, 0, 0, .4);
+
+  p{
+    white-space: nowrap;
+  }
+}
+
+@media(max-width: 640px){
+  .routes,.banner{
+    display: none;
+  }
+  .subject{
+    margin: auto;
+  }
+}
