@@ -5,18 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkComponent } from './routes/work/work.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
+import { AppService } from './app.service';
+import { RedditPostComponent } from './components/reddit-post/reddit-post.component';
+import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkComponent,
-    NavigationComponent
+    NavigationComponent,
+    RedditPostComponent,
+    RedditThreadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AppService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

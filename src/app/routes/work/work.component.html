@@ -1,6 +1,3 @@
 <div class="work-wrapper">
-    <div class="item" *ngFor="let url of resData">
-      <img [src]="url.url" alt="">
-      <span>-- VIEW --</span>
-    </div>
+    <reddit-post class="item-wrapper" *ngFor="let post of reddit.resData" [post]='post'></reddit-post>
   </div>

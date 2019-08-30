@@ -1,0 +1,45 @@
+.post-wrapper{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+
+  .post-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span{
+    position: absolute;
+    color: #fff;
+    opacity: 0;
+    transition: all ease 300ms;
+    z-index: 3;
+  }
+
+  &:hover{
+    img{
+      transform: scale(1.2,1.2);
+      opacity: .4;
+    }
+    span{
+      opacity: 1;
+    }
+  }
+}
+
+img{
+  width: 110%;
+  max-width: 110%;
+  max-height: 110%;
+  object-fit: fill;
+  transition: all ease 300ms;
+}

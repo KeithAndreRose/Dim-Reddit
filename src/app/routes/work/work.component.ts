@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RedditService } from 'src/app/services/reddit.service';
 
 @Component({
   selector: 'app-work',
@@ -6,23 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./work.component.scss']
 })
 export class WorkComponent implements OnInit {
-
-  resData = []
-
-  constructor() {
+  constructor(public reddit:RedditService) {
   }
   
   ngOnInit() {
-    fetch('https://www.reddit.com/r/EroticArt.json')
-    .then(response => response.json())
-    .then(myJson => this.handleResData(myJson));
+
   }
 
-  handleResData(data){
-    const items = data.data.children
-    items.forEach(element => {
-      this.resData.push(element.data);
-    });
-  }
 
 }
