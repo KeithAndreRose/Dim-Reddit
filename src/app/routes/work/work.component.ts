@@ -7,6 +7,8 @@ import { RedditService } from 'src/app/services/reddit.service';
   styleUrls: ['./work.component.scss']
 })
 export class WorkComponent implements OnInit {
+  targetedPost;
+
   constructor(public reddit:RedditService) {
   }
   
@@ -14,5 +16,8 @@ export class WorkComponent implements OnInit {
 
   }
 
+  targetPost(post){
+    this.targetedPost = post;
+  }
 
 }

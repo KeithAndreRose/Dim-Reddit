@@ -1,1 +1,5 @@
-<p>reddit-thread works!</p>
+<div class="thread-wrapper">
+  <div class="title" [innerText]="thread.title"></div>
+  <div class="selftext" [innerText]="thread.selftext"></div>
+  <img *ngIf="thread.preview" [src]="thread.url" alt="Image Upload">
+</div>

@@ -1,3 +1,5 @@
 <div class="work-wrapper">
-    <reddit-post class="item-wrapper" *ngFor="let post of reddit.resData" [post]='post'></reddit-post>
-  </div>
+    <reddit-post class="item-wrapper" *ngFor="let post of reddit.resData" [post]='post' (click)="targetPost(post)"></reddit-post>
+</div>
+
+<reddit-thread *ngIf="targetedPost" [thread]="targetedPost"></reddit-thread>
