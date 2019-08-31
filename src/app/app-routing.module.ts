@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WorkComponent } from './routes/work/work.component';
+import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'work', pathMatch:'full'},
-  {path: 'work', component: WorkComponent},
-  {path: '**', redirectTo: ''}
+  {path: '', component: WorkComponent, pathMatch:'full'},
+  {path: 'post/:permalink', component: RedditThreadComponent},
+  {path: '**', redirectTo: ''},
 ];
 
 @NgModule({
