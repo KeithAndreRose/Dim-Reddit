@@ -1,5 +1,24 @@
-<div class="thread-wrapper">
-  <div class="title" [innerText]="thread.title"></div>
-  <div class="selftext" [innerText]="thread.selftext"></div>
+<div class="thread-wrapper" *ngIf="thread">
+  <div class="title">
+    {{thread.title}}
+  </div>
+  <div class="selftext">
+    {{thread.selftext}}
+  </div>
+  <div class="body">
+    {{thread.body}}
+  </div>
   <img *ngIf="thread.preview" [src]="thread.url" alt="Image Upload">
+
+  <hr>
+  
+  <div *ngFor="let comment of comments">
+    <h3>
+      {{comment.author}}
+    </h3>
+    <p>
+      {{comment.body}}
+    </p>
+    <hr>
+  </div>
 </div>
