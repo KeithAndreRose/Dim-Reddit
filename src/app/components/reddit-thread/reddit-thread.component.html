@@ -1,24 +1,43 @@
-<div class="thread-wrapper" *ngIf="thread">
-  <div class="title">
-    {{thread.title}}
-  </div>
-  <div class="selftext">
-    {{thread.selftext}}
-  </div>
-  <div class="body">
-    {{thread.body}}
-  </div>
-  <img *ngIf="thread.preview" [src]="thread.url" alt="Image Upload">
+<div class="thread-wrapper" *ngIf="thread" (scroll)="scrollEvent($event)">
+  <div class="info" #infoElem>
+    <div class="points">
+      <div class="increments">
+        <button><</button>
+        <button>></button>
+      </div>
+      <h1>[0]</h1>
+    </div>
 
-  <hr>
-  
-  <div *ngFor="let comment of comments">
-    <h3>
-      {{comment.author}}
-    </h3>
-    <p>
-      {{comment.body}}
-    </p>
-    <hr>
+    <div class="detail">
+      Lorem ipsum dolor sit amet.
+    </div>
+
+    <li>
+      <b>Author: </b><span>[AUTHOR]</span>
+    </li>
+    <li>
+      <b>Submitted: </b><span>[SUBMITTED]</span>
+    </li>
+    <li>
+      <b>points: </b><span>[POINTS]</span>
+    </li>
+    <li>
+      <b>comments: </b><span>[COMMENTS]</span>
+    </li>
+  </div>
+
+  <aside class="control">
+    <button><</button>
+    <button>></button>
+  </aside>
+
+  <div class="main">
+    <article>
+      <h1 class="title">[REDDIT THREAD TITLE GOES HERE]</h1>
+      <div class="body"></div>
+    </article>
+    <div class="comments" #commentsElem>
+      <h3>Comments: </h3>
+    </div>
   </div>
 </div>

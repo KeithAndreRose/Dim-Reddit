@@ -1,17 +1,108 @@
-.thread-wrapper{
-  position: absolute;
-  left: 0;
-  top: 0;
+.thread-wrapper {
+  position: relative;
   width: 100%;
   min-height: 100%;
   height: fit-content;
   background: #fff;
   padding: 1rem;
-  z-index: 7;
 }
 
-img{
+.points,
+.main {
+  h1 {
+    font-size: 40px;
+    letter-spacing: 1.4px;
+    text-transform: none;
+    color: #969696;
+    margin: 0.5rem 1rem;
+  }
+}
+
+.info {
+  position: fixed;
+  left: 0;
+  padding: 2.66rem 1.88rem;
+  width: 350px;
+  font-size: 18px;
+  font-family: "Roboto";
+  font-weight: 400;
+  line-height: 1.5em;
+  transition: opacity ease 300ms;
+  &.locked{
+    opacity: 0;
+    user-select: none;
+  }
+
+  .points {
+    display: flex;
+    flex: row;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 0.88rem;
+
+    .increments {
+      width: fit-content;
+      button {
+        display: block;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .detail {
+    margin-bottom: 1.2rem;
+  }
+}
+
+.main {
   position: relative;
-  max-width: 100%;
-  object-fit: contain;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: 90%;
+  
+  article {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(100% - 220px - 350px);
+    min-height: 77vh;
+
+    .title {
+      margin-left: 0;
+    }
+
+    .body {
+      font-size: 18px;
+      font-family: "Roboto";
+      font-weight: 400;
+      line-height: 1.5em;
+    }
+  }
+}
+
+.control {
+  position: fixed;
+  right: 0;
+  padding: 1rem;
+  width: 220px;
+}
+
+button {
+  border: none;
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  margin: 0.1rem;
+  font-size: 1.5rem;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5em;
+  outline: none;
+  background: #303030;
+  &:hover {
+    background: #303030ef;
+  }
+  &:active {
+    background: #303030;
+  }
 }

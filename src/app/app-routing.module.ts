@@ -6,7 +6,7 @@ import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.
 
 const routes: Routes = [
   {path: '', component: WorkComponent, pathMatch:'full'},
-  {path: 'post/:permalink', component: RedditThreadComponent},
+  {path: 'thread', component: RedditThreadComponent},
   {path: '**', redirectTo: ''},
 ];
 

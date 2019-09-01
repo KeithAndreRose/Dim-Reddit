@@ -11,6 +11,7 @@
 
   </div>
   <div class="subject">
-    <input type="text" placeholder="Subreddit Here" [value]='reddit.currentSubreddit' (keydown.enter)="reddit.getSubreddit($event.target.value)">
+    <span>r/</span>
+    <input type="text" placeholder="..." [value]='reddit.currentSubreddit' (keydown.enter)="reddit.getSubreddit($event.target.value)">
   </div>
 </nav>
