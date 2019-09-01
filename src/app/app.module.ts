@@ -9,6 +9,8 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { AppService } from './app.service';
 import { RedditPostComponent } from './components/reddit-post/reddit-post.component';
 import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { MarkdownParserService } from './services/markdown-parser.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.
     WorkComponent,
     NavigationComponent,
     RedditPostComponent,
-    RedditThreadComponent
+    RedditThreadComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.
     HttpClientModule,
   ],
   providers: [
-    AppService
+    AppService,
+    MarkdownParserService
   ],
   bootstrap: [AppComponent]
 })

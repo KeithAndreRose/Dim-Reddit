@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from "@angular/core";
 import { RedditService } from "src/app/services/reddit.service";
+import { ActivatedRoute } from '@angular/router';
+import { MarkdownParserService } from 'src/app/services/markdown-parser.service';
 
 @Component({
   selector: "reddit-thread",
@@ -20,14 +22,24 @@ export class RedditThreadComponent implements OnInit {
   thread = {};
   comments = [];
 
-  constructor(private reddit: RedditService) {
+  constructor(
+    private reddit: RedditService,
+    private route: ActivatedRoute,
+    public md: MarkdownParserService
+  ) {
 
   }
 
   ngOnInit() {
-    return
-    const permalink = `http://reddit.com${this.threadURL.slice(0, -1)}.json`;
-    this.reddit.getThread(permalink)
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id)
+        this.fetchThread(id);
+    })
+  }
+
+  fetchThread(threadId) {
+    this.reddit.getThread(threadId)
       .then(response => response.json())
       .then(json => {
         const thread = json[0].data.children[0].data;
@@ -35,6 +47,7 @@ export class RedditThreadComponent implements OnInit {
         json[1].data.children.forEach(e => post.comments.push(e.data));
         this.thread = post.thread;
         this.comments = post.comments;
+        console.log(post)
       });
   }
 
@@ -46,16 +59,7 @@ export class RedditThreadComponent implements OnInit {
 
   @HostListener("window:scroll", ["$event"])
   onScroll = (event) => {
-    const d = {
-      currentOffset: window.scrollY,
-      targetOffset: (this.commentsElem.nativeElement.offsetTop - window.innerHeight + 100)
-    };
-
-    console.log(d, d.currentOffset > d.targetOffset)
-
-    if(d.targetOffset < 320) return
-
-    if (d.currentOffset > d.targetOffset) this.infoElem.nativeElement.classList.add('locked');
+    if (window.scrollY > 320) this.infoElem.nativeElement.classList.add('locked');
     else this.infoElem.nativeElement.classList.remove('locked');
   }
 

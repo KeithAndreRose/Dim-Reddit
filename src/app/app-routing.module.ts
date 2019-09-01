@@ -6,7 +6,7 @@ import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.
 
 const routes: Routes = [
   {path: '', component: WorkComponent, pathMatch:'full'},
-  {path: 'thread', component: RedditThreadComponent},
+  {path: 'thread/:id', component: RedditThreadComponent},
   {path: '**', redirectTo: ''},
 ];
 

@@ -8,11 +8,12 @@ export class RedditService {
   resData = [];
 
   constructor() {
-    const defaultSubreddit = 'gonewild';
+    const defaultSubreddit = 'pics';
     this.getSubreddit(defaultSubreddit);
   }
 
   getSubreddit(subreddit) {
+    this.resData = [];
     fetch(`https://www.reddit.com/r/${subreddit}.json`)
       .then(response => response.json())
       .then(json => {
@@ -23,8 +24,9 @@ export class RedditService {
       });
   }
 
-  getThread(permalink) {
-    const url = `https://cors-anywhere.herokuapp.com/${permalink}`;
+  getThread(threadId) {
+    const url = `https://cors-anywhere.herokuapp.com/https://www.reddit.com/comments/${threadId}.json`;
+    console.log(url)
     return fetch(`${url}`)
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RedditService } from 'src/app/services/reddit.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-work',
@@ -8,20 +7,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./work.component.scss']
 })
 export class WorkComponent implements OnInit {
-  threadURL;
+  threadName;
 
-  constructor(public reddit: RedditService, private route: ActivatedRoute) {}
+  constructor(public reddit: RedditService) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      if(params.get('permalink')){
-      }
-      else{
-      }
-    })
-  }
-
-  targetPost(post) {
-    this.threadURL = post;
   }
 }

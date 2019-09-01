@@ -55,7 +55,7 @@
 }
 
 .main {
-  position: relative;
+  position: absolute;
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
@@ -64,19 +64,29 @@
   article {
     position: relative;
     margin: 0 auto;
-    max-width: calc(100% - 220px - 350px);
+    max-width: calc(100vw - 220px - 350px);
     min-height: 77vh;
 
     .title {
       margin-left: 0;
     }
 
-    .body {
+    section{
       font-size: 18px;
       font-family: "Roboto";
       font-weight: 400;
       line-height: 1.5em;
+
+      img{
+        width: 100%;
+        margin: 0 auto;
+        object-fit: contain;
+      }
     }
+  }
+
+  .comments{
+    width: 70%;
   }
 }
 
