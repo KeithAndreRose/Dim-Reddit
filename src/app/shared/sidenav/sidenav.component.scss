@@ -1,0 +1,44 @@
+
+nav{
+  position: fixed;
+  left: 0;
+  top: 100px;
+  background: rgba(255, 255, 255, .8);
+  color: #000;
+  width: 230px;
+  border-right: #000 solid 1px;
+  z-index: 5;
+  display: flex;
+  flex-flow: column;
+  height: calc(100% - 100px);
+  transform: translateX(-230px);
+  transition: transform ease 300ms;
+  overflow-y: auto;
+
+  &.open{ transform: translateX(0px) }
+
+}
+
+hr{
+  padding: 0rem .7rem;
+  margin: .5rem 0;
+  border: #000 solid 1px;
+  opacity: .3;
+}
+
+ul{
+  display: flex;
+  flex-flow: column;
+
+  a{
+    width: 100%;
+    padding: .5rem .7rem;
+    color: #000;
+    text-decoration: none;
+    &:hover{
+      background: rgba(0,0,0,.1);
+    }
+  }
+
+
+}

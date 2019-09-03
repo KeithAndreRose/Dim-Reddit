@@ -6,11 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WorkComponent } from './routes/work/work.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
-import { AppService } from './app.service';
 import { RedditPostComponent } from './components/reddit-post/reddit-post.component';
 import { RedditThreadComponent } from './components/reddit-thread/reddit-thread.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { MarkdownParserService } from './services/markdown-parser.service';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { MarkdownParserService } from './services/markdown-parser.service';
     NavigationComponent,
     RedditPostComponent,
     RedditThreadComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    SidenavComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,6 @@ import { MarkdownParserService } from './services/markdown-parser.service';
     HttpClientModule,
   ],
   providers: [
-    AppService,
     MarkdownParserService
   ],
   bootstrap: [AppComponent]

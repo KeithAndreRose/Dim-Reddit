@@ -1,12 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
-@import'reset.css';
-@import url('https://fonts.googleapis.com/css?family=Abel|Oswald:200,300,400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap');
+@import "reset.css";
+@import url("https://fonts.googleapis.com/css?family=Abel|Oswald:200,300,400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap");
 
-:root{
+:root {
   --thirdWidth: 33%;
 }
 
-body{
-  font-family: 'Oswald', 'Roboto', sans-serif;
+body {
+  font-family: "Oswald", "Roboto", sans-serif;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  background-color: transparent;
+  z-index: 3;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #000;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

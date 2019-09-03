@@ -174,11 +174,13 @@ button {
   article{
     max-width: calc(100vw - 350px);
   }
-
+  
 }
 
 @media(max-width:978px){
-  
+  article{
+    max-width: 100vw;
+  }
 }
 
 @media(max-width:656px){

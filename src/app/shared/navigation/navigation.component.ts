@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from 'src/app/app.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RedditService } from 'src/app/services/reddit.service';
 import { Router } from '@angular/router';
 
@@ -9,15 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  @Output('sideNavToggle')
+  sideNavToggle = new EventEmitter<any>()
+
   constructor(public reddit: RedditService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  goToSubreddit(value){
-    this.router.navigate(['/r',value])
-  }
-
-
+  goToSubreddit = (value) => this.router.navigate(['/r',value])
+  
+  toggleMenu = () => this.sideNavToggle.emit()
 }
 
