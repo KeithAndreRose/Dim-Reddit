@@ -9,6 +9,6 @@
   </div>
   <div class="subject">
     <span>r/</span>
-    <input type="text" placeholder="Go To.." [value]='reddit.state.subreddit' (keydown.enter)="goToSubreddit($event.target.value)">
+    <input type="text" placeholder="Go To.." [value]='reddit.state?.subreddit' (keydown.enter)="goToSubreddit($event.target.value)">
   </div>
 </nav>

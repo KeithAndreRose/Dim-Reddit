@@ -1,47 +1,52 @@
-<div class="thread-wrapper" *ngIf="thread" (scroll)="scrollEvent($event)">
+<div class="thread-wrapper" *ngIf="thread">
   <div class="info" #infoElem>
     <div class="points">
       <div class="increments">
-        <button><</button>
-        <button>></button>
+        <button>
+          <</button> <button>>
+        </button>
       </div>
       <h1>[{{thread.ups}}]</h1>
     </div>
 
     <div class="detail">
-      Lorem ipsum dolor sit amet.
-    </div>
 
-    <li>
-      <b>Author: </b><span>{{thread.author}}</span>
-    </li>
-    <li>
-      <b>Submitted: </b><span>{{ (thread.created_utc * 1000) | date}}</span>
-    </li>
-    <li>
-      <b>points: </b><span>{{ thread.ups }}</span>
-    </li>
-    <li>
-      <b>comments: </b><span>{{ thread.num_comments }}</span>
-    </li>
+      <li>
+        <b>Author: </b><span>{{thread.author}}</span>
+      </li>
+      <li>
+        <b>Submitted: </b><span>{{ (thread.created_utc * 1000) | date}}</span>
+      </li>
+      <li>
+        <b>points: </b><span>{{ thread.ups }}</span>
+      </li>
+      <li>
+        <b>comments: </b><span>{{ thread.num_comments }}</span>
+      </li>
+    </div>
   </div>
 
   <aside *ngIf="prefetched" class="control">
-    <button (click)="reddit.getPreviousInFeed()"> < </button>
-    <button (click)="reddit.getNextInFeed()" > > </button>
+    <button (click)="reddit.getPreviousInFeed()">
+      < </button> <button (click)="reddit.getNextInFeed()"> >
+    </button>
   </aside>
 
   <div class="main">
     <article>
-      <h1 class="title">{{thread.title}}</h1>
+      <a class="title" [href]="thread.url">{{thread.title}}</a>
       <section>
         <div *ngIf="thread.selftext" class="body" [innerHTML]="md.convert(thread.selftext)"></div>
         <img *ngIf="thread.post_hint == 'image'" [src]="thread.url" alt="Post Image">
-        <img *ngIf="thread.post_hint == 'link'" [src]="thread.url" alt="Post Image">
+        <img *ngIf="thread.post_hint == 'link' && thread.thumbnail" [src]="thread.thumbnail" alt="Link thumbnail">
         <video *ngIf="thread.post_hint == 'link' && thread.preview.reddit_video_preview" controls>
           <source [src]="thread.preview.reddit_video_preview.fallback_url">
         </video>
-        <div *ngIf="thread.secure_media_embed" [innerHTML]="thread.secure_media_embed.content"></div>
+        <video *ngIf="thread.post_hint == 'hosted:video'" controls autoplay>
+          <source [src]="thread.url">
+        </video>
+        <div *ngIf="thread.post_hint =='rich:video'" [innerHTML]="thread.secure_media_embed.content | safeHtml"
+          resize=both></div>
       </section>
     </article>
     <div class="comments" #commentsElem>
@@ -49,7 +54,7 @@
       <hr>
       <div *ngFor="let c of comments" style="border-bottom: 1px #000 solid;">
         <h4>{{c.author}}</h4>
-        <div *ngIf="c.body" [innerHTML]="md.convert(c.body)"></div>
+        <div *ngIf="c.body" [innerHTML]="c.body_html | safeHtml"></div>
       </div>
     </div>
   </div>

@@ -27,7 +27,29 @@
   font-family: "Roboto";
   font-weight: 400;
   line-height: 1.5em;
+  z-index: 3;
   transition: opacity ease 200ms;
+  display: flex;
+  flex-flow: column; 
+
+  @media(max-width:1295px){
+    &{
+      left: auto;
+      right: 0;
+      max-width: 70%;
+    }
+  }
+
+  @media(max-width:978px){
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 0;
+    flex-flow: row;
+    width: fit-content;
+  }
+  
   &.locked {
     opacity: 0;
     user-select: none;
@@ -67,29 +89,47 @@
     position: relative;
     margin: 0 auto;
     max-width: calc(100vw - 220px - 350px);
-    min-height: 77vh;
+    min-height: 50vh;
+    overflow: auto;
+
+    @media(max-width:1295px){
+      &{
+        margin: 0;
+        max-width: calc(100vw - 350px);
+      }
+    }
+
+    @media(max-width:978px){
+      margin-top: 200px; 
+    }
 
     .title {
       margin-left: 0;
       font-size: 25px;
-    }
-
-    section {
-      font-size: 18px;
-      font-family: "Roboto";
-      font-weight: 400;
-      line-height: 1.5em;
-
-      img , video{
-        width: 100%;
-        object-fit: contain;
-      }
+      letter-spacing: 1.4px;
+      text-decoration: none;
+      color: inherit;
+      color: #000;
+      font-weight: bold;
     }
   }
 
-  .comments {
-    width: 70%;
+  section {
+    font-size: 18px;
+    font-family: "Roboto";
+    font-weight: 400;
+    line-height: 1.5em;
+
+    img,
+    video {
+      width: 100%;
+      object-fit: contain;
+    }
   }
+}
+
+.comments {
+  width: 70%;
 }
 
 .control {
@@ -98,6 +138,12 @@
   padding: 1rem;
   width: 220px;
   z-index: 3;
+  @media(max-width:1295px){
+    &{
+      display: none;
+    }
+  }
+  
 }
 
 button {
@@ -118,4 +164,23 @@ button {
   &:active {
     background: #303030;
   }
+}
+
+@media(max-width:1295px){
+  .control{
+    display: none;
+  }
+
+  article{
+    max-width: calc(100vw - 350px);
+  }
+
+}
+
+@media(max-width:978px){
+  
+}
+
+@media(max-width:656px){
+
 }

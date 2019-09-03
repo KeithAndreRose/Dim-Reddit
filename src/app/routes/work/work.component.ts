@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RedditService } from 'src/app/services/reddit.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-work',
@@ -19,12 +20,15 @@ export class WorkComponent implements OnInit, AfterViewInit {
   constructor(
     public reddit: RedditService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title:Title
     ) {
     this.route.paramMap.subscribe(params => {
       const subreddits = params.get('subreddits');
       if(!subreddits) return this.reddit.getBest();
       this.reddit.getSubreddit(subreddits);
+      this.title.setTitle(subreddits);
+
     })
   }
 

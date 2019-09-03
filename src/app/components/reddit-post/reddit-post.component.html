@@ -1,9 +1,15 @@
 <a class="post-wrapper" [href]="['/r/',post.subreddit,'comments',post.id]" [routerLink]="['/r/',post.subreddit,'comments',post.id]">
+  <a class="title" [href]="post.url">{{post.title}}</a>
   <div class="post-container">
-    <img *ngIf="post.post_hint == 'image'" [src]="post.url" alt="">
-    <div *ngIf="!post.preview">
-      <span>-- {{post.title}} --</span>
-      
-    </div>
+    <div *ngIf="post.selftext" class="selftext" [innerHTML]="post.selftext_html | safeHtml"></div>
+    <img *ngIf="post.post_hint == 'image'" [src]="post.url" alt="Post Image">
+    <img *ngIf="post.post_hint == 'link' && post.preview.thumbnail" [src]="post.thumbnail" alt="Link thumbnail">
+    <video *ngIf="post.post_hint == 'link' && post.preview.reddit_video_preview" controls>
+      <source [src]="post.preview.reddit_video_preview.fallback_url">
+    </video>
+    <img *ngIf="post.post_hint == 'hosted:video'" [src]="post.thumbnail" alt="Post Image">
+    <img *ngIf="post.post_hint == 'rich:video'" [src]="post.secure_media.oembed.thumbnail_url" alt="Post Image">
   </div>
+  <p>by:<span class="author">{{post.author}}</span></p>
+
 </a>

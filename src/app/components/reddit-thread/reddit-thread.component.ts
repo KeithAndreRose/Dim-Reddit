@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from "@angular/core";
-import { RedditService } from "src/app/services/reddit.service";
+import { RedditService, redditThread } from "src/app/services/reddit.service";
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownParserService } from 'src/app/services/markdown-parser.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "reddit-thread",
@@ -9,6 +10,7 @@ import { MarkdownParserService } from 'src/app/services/markdown-parser.service'
   styleUrls: ["./reddit-thread.component.scss"]
 })
 export class RedditThreadComponent implements OnInit {
+  corsProxy = (url)=> `https://cors-anywhere.herokuapp.com/${url}`;
 
   @ViewChild('infoElem', { static: false })
   infoElem: ElementRef<HTMLElement>;
@@ -19,14 +21,15 @@ export class RedditThreadComponent implements OnInit {
 
   @Input() threadURL: string;
 
-  thread = {};
+  thread: redditThread;
   comments = [];
   prefetched: true;
 
   constructor(
     public reddit: RedditService,
     private route: ActivatedRoute,
-    public md: MarkdownParserService
+    public md: MarkdownParserService,
+    private title:Title
   ) {
     this.route.paramMap.subscribe(params => {
       const subreddit = params.get('subreddit');
@@ -34,7 +37,7 @@ export class RedditThreadComponent implements OnInit {
 
       this.prefetched = this.reddit.findInFeed(id)
       if (this.prefetched) {
-        this.thread = this.prefetched;
+        this.thread = this.prefetched as redditThread;
         return this.fetchOnlyComments(subreddit, id);
       }
       this.fetchThread(subreddit, id);
@@ -54,6 +57,7 @@ export class RedditThreadComponent implements OnInit {
         this.thread = thread;
         this.comments = comments;
         console.log({ thread, comments })
+        this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
       });
   }
 
@@ -65,6 +69,8 @@ export class RedditThreadComponent implements OnInit {
         json[1].data.children.forEach(e => comments.push(e.data));
         this.comments = comments;
         console.log({thread: this.thread, comments })
+        this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
+
       });
   }
 
@@ -76,7 +82,7 @@ export class RedditThreadComponent implements OnInit {
 
   @HostListener("window:scroll", ["$event"])
   onScroll = (event) => {
-    if (window.scrollY > 320) this.infoElem.nativeElement.classList.add('locked');
+    if (window.scrollY > 120) this.infoElem.nativeElement.classList.add('locked');
     else this.infoElem.nativeElement.classList.remove('locked');
   }
 
