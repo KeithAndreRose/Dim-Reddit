@@ -26,9 +26,9 @@
     </li>
   </div>
 
-  <aside class="control">
-    <button><</button>
-    <button>></button>
+  <aside *ngIf="prefetched" class="control">
+    <button (click)="reddit.getPreviousInFeed()"> < </button>
+    <button (click)="reddit.getNextInFeed()" > > </button>
   </aside>
 
   <div class="main">
@@ -36,7 +36,12 @@
       <h1 class="title">{{thread.title}}</h1>
       <section>
         <div *ngIf="thread.selftext" class="body" [innerHTML]="md.convert(thread.selftext)"></div>
-        <img *ngIf="thread.post_hint == 'image'" [src]="thread.url" alt="">
+        <img *ngIf="thread.post_hint == 'image'" [src]="thread.url" alt="Post Image">
+        <img *ngIf="thread.post_hint == 'link'" [src]="thread.url" alt="Post Image">
+        <video *ngIf="thread.post_hint == 'link' && thread.preview.reddit_video_preview" controls>
+          <source [src]="thread.preview.reddit_video_preview.fallback_url">
+        </video>
+        <div *ngIf="thread.secure_media_embed" [innerHTML]="thread.secure_media_embed.content"></div>
       </section>
     </article>
     <div class="comments" #commentsElem>

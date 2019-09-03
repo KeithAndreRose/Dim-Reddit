@@ -1,17 +1,14 @@
 <nav>
   <div class="routes">
-    <a href="/work" routerLink="work" routerLinkActive="active">WORK</a>
-    <a href="/about">ABOUT</a>
-    <a href="/news">NEWS</a>
-    <a href="/contact">CONTACT</a>
-    <a href="/resources">RESOURCES</a>
-    <a href="/photos">PHOTOS</a>
+    <a href="/" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Front Page</a>
+    <a href="/r/popular" routerLink="/r/popular" routerLinkActive="active">POPULAR</a>
+    <a href="/r/all" routerLink="/r/all" routerLinkActive="active">ALL</a>
   </div>
   <div class="banner">
 
   </div>
   <div class="subject">
     <span>r/</span>
-    <input type="text" placeholder="..." [value]='reddit.currentSubreddit' (keydown.enter)="reddit.getSubreddit($event.target.value)">
+    <input type="text" placeholder="Go To.." [value]='reddit.state.subreddit' (keydown.enter)="goToSubreddit($event.target.value)">
   </div>
 </nav>

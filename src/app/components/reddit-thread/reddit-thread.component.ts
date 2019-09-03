@@ -21,33 +21,50 @@ export class RedditThreadComponent implements OnInit {
 
   thread = {};
   comments = [];
+  prefetched: true;
 
   constructor(
-    private reddit: RedditService,
+    public reddit: RedditService,
     private route: ActivatedRoute,
     public md: MarkdownParserService
   ) {
+    this.route.paramMap.subscribe(params => {
+      const subreddit = params.get('subreddit');
+      const id = params.get('id');
+
+      this.prefetched = this.reddit.findInFeed(id)
+      if (this.prefetched) {
+        this.thread = this.prefetched;
+        return this.fetchOnlyComments(subreddit, id);
+      }
+      this.fetchThread(subreddit, id);
+    })
 
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id)
-        this.fetchThread(id);
-    })
   }
 
-  fetchThread(threadId) {
-    this.reddit.getThread(threadId)
-      .then(response => response.json())
+  fetchThread(subreddit, id) {
+    this.reddit.getThread(subreddit, id).then(response => response.json())
       .then(json => {
         const thread = json[0].data.children[0].data;
-        const post = { thread, comments: [] };
-        json[1].data.children.forEach(e => post.comments.push(e.data));
-        this.thread = post.thread;
-        this.comments = post.comments;
-        console.log(post)
+        const comments = [];
+        json[1].data.children.forEach(e => comments.push(e.data));
+        this.thread = thread;
+        this.comments = comments;
+        console.log({ thread, comments })
+      });
+  }
+
+  fetchOnlyComments(subreddit, id) {
+    this.comments = [];
+    this.reddit.getThread(subreddit, id).then(response => response.json())
+      .then(json => {
+        const comments = [];
+        json[1].data.children.forEach(e => comments.push(e.data));
+        this.comments = comments;
+        console.log({thread: this.thread, comments })
       });
   }
 

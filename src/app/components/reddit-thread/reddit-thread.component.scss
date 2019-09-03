@@ -27,8 +27,8 @@
   font-family: "Roboto";
   font-weight: 400;
   line-height: 1.5em;
-  transition: opacity ease 300ms;
-  &.locked{
+  transition: opacity ease 200ms;
+  &.locked {
     opacity: 0;
     user-select: none;
   }
@@ -58,9 +58,11 @@
   position: absolute;
   width: 100%;
   margin: 0 auto;
+  top: 0;
+  left: 0;
   padding: 1rem;
   min-height: 90%;
-  
+
   article {
     position: relative;
     margin: 0 auto;
@@ -69,23 +71,23 @@
 
     .title {
       margin-left: 0;
+      font-size: 25px;
     }
 
-    section{
+    section {
       font-size: 18px;
       font-family: "Roboto";
       font-weight: 400;
       line-height: 1.5em;
 
-      img{
+      img , video{
         width: 100%;
-        margin: 0 auto;
         object-fit: contain;
       }
     }
   }
 
-  .comments{
+  .comments {
     width: 70%;
   }
 }
@@ -95,6 +97,7 @@
   right: 0;
   padding: 1rem;
   width: 220px;
+  z-index: 3;
 }
 
 button {
