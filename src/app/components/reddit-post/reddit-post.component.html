@@ -7,7 +7,7 @@
       <source [src]="post.preview.reddit_video_preview.fallback_url">
     </video>
     <img *ngIf="post.post_hint == 'hosted:video'" [src]="post.thumbnail" alt="Post Image">
-    <img *ngIf="post.post_hint == 'rich:video'" [src]="post.secure_media.oembed.thumbnail_url" alt="Post Image">
+    <!-- <img *ngIf="post.post_hint == 'rich:video'" [src]="post.secure_media.oembed.thumbnail_url" alt="Post Image"> -->
   </div>
   <p>by:<span class="author">{{post.author}}</span></p>
 

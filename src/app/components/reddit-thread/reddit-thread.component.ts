@@ -48,30 +48,17 @@ export class RedditThreadComponent implements OnInit {
   ngOnInit() {
   }
 
-  fetchThread(subreddit, id) {
-    this.reddit.getThread(subreddit, id).then(response => response.json())
-      .then(json => {
-        const thread = json[0].data.children[0].data;
-        const comments = [];
-        json[1].data.children.forEach(e => comments.push(e.data));
-        this.thread = thread;
-        this.comments = comments;
-        console.log({ thread, comments })
-        this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
-      });
+  async fetchThread(subreddit, id) {
+    const fetch = await this.reddit.getThread(subreddit, id);
+    this.thread = fetch.thread;
+    this.comments = fetch.comments;
+    this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
   }
 
-  fetchOnlyComments(subreddit, id) {
-    this.comments = [];
-    this.reddit.getThread(subreddit, id).then(response => response.json())
-      .then(json => {
-        const comments = [];
-        json[1].data.children.forEach(e => comments.push(e.data));
-        this.comments = comments;
-        console.log({thread: this.thread, comments })
-        this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
-
-      });
+  async fetchOnlyComments(subreddit, id) {
+    const fetch = await this.reddit.getThread(subreddit, id);
+    this.comments = fetch.comments;
+    this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
   }
 
   toggleInfoElemLock(isIntersecting) {

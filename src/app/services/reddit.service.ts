@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
   providedIn: 'root'
 })
 export class RedditService {
+  isLoading;
   state = {
     subreddit: '',
     prefix: '',
@@ -45,7 +46,8 @@ export class RedditService {
 
   getBest() {
     this.feed = [];
-    const url = `https://www.reddit.com/best.json?raw_json=1`
+    const url = `https://www.reddit.com/best.json?raw_json=1`;
+    this.isLoading = true;
     fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -55,6 +57,7 @@ export class RedditService {
         this.state['subreddit'] = '';
         this.state['jsonPath'] = url;
         this.state['lastThing'] = items[items.length - 1].data.name;
+        this.isLoading = false;
       });
   }
 
@@ -82,19 +85,29 @@ export class RedditService {
     const count = 25;
     const lastThing = this.state['lastThing']
     const prefix = this.state['prefix'];
-    const url = `https://www.reddit.com/${prefix}.json?count=${count}&after=${lastThing}&raw_json=1`
+    const url = `https://www.reddit.com/${prefix}.json?count=${count}&after=${lastThing}&raw_json=1`;
+    this.isLoading = true;
     fetch(url)
       .then(response => response.json())
       .then(json => {
         const items = json.data.children;
         items.forEach(element => this.feed.push(element.data));
         this.state['lastThing'] = items[items.length - 1].data.name;
+        this.isLoading = false;
       });
   }
 
-  getThread(subreddit, id) {
+  async getThread(subreddit, id) {
     const url = `https://www.reddit.com/r/${subreddit}/comments/${id}.json?raw_json=1`;
-    return fetch(url)
+    this.isLoading = true;
+    return fetch(url).then(response => response.json())
+    .then(json => {
+      const thread = json[0].data.children[0].data;
+      const comments = [];
+      json[1].data.children.forEach(e => comments.push(e.data));
+      this.isLoading = false;
+      return { thread, comments }
+    });
   }
 }
 
