@@ -45,3 +45,9 @@ ul{
 
 
 }
+
+@media(max-width:978px){
+  nav{
+    position: fixed;
+  }
+}
