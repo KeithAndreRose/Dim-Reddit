@@ -2,18 +2,15 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  // width: 320px;
-  // height: 320px;
   height: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  // border-left: #000 solid 1px;
-  // border-right: #000 solid 1px;
-  // border-bottom: #000 solid 1px;
-
+  border-bottom: solid 1px rgb(0, 0, 0,.15);
+  margin: .25rem;
+  
   color: #fff;
   padding: 0.5rem;
   opacity: .9;
@@ -70,4 +67,11 @@ img,video{
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
+}
+
+@media(max-width:656px){
+  .post-wrapper{
+    max-height: 40vh;
+  }
+
 }

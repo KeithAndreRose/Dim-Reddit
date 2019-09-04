@@ -1,7 +1,7 @@
 .app-container{
   overflow: hidden;
   display: grid;
-  height: 100%;
+  height: calc(100% - 50px);
   grid-template-columns: auto minmax(320px,1100px) auto;
   justify-content: space-between;
   transition: all ease 300ms;
@@ -9,6 +9,8 @@
   .sidenav-container{
     grid-column: 1/2;
     height: 100%;
+    overflow: auto;
+
   }
 
   .route-container{
@@ -19,6 +21,7 @@
     padding: 0 1rem;
     grid-column: 2/3;
     max-width: 1100px;
+    scroll-behavior: smooth;
   }
 
   .sidebar-container{
@@ -29,6 +32,7 @@
     top: 4rem;
     right: 0;
     width: 300px;
+    overflow: auto;
   }
 
 }

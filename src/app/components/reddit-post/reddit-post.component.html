@@ -1,7 +1,6 @@
 <a class="post-wrapper" [href]="['/r/',post.subreddit,'comments',post.id]" [routerLink]="['/r/',post.subreddit,'comments',post.id]">
   <a class="title" [href]="post.url">{{post.title}}</a>
   <div class="post-container">
-    <div *ngIf="post.selftext" class="selftext" [innerHTML]="post.selftext_html | safeHtml"></div>
     <img *ngIf="post.post_hint == 'image'" [src]="post.url" alt="Post Image">
     <img *ngIf="post.post_hint == 'link' && post.preview.thumbnail" [src]="post.thumbnail" alt="Link thumbnail">
     <video *ngIf="post.post_hint == 'link' && post.preview.reddit_video_preview" controls>

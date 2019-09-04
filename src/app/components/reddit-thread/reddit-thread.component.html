@@ -1,4 +1,5 @@
 <div class="thread-wrapper" *ngIf="thread">
+
   <div class="info" #infoElem>
     <div class="points">
       <div class="increments">
@@ -10,27 +11,24 @@
     </div>
 
     <div class="detail">
-
-      <li>
-        <b>Author: </b><span>{{thread.author}}</span>
-      </li>
-      <li>
-        <b>Submitted: </b><span>{{ (thread.created_utc * 1000) | date}}</span>
-      </li>
-      <li>
-        <b>points: </b><span>{{ thread.ups }}</span>
-      </li>
-      <li>
-        <b>comments: </b><span>{{ thread.num_comments }}</span>
-      </li>
+      <div>
+        <li>
+          <b>Author: </b><span>{{thread.author}}</span>
+        </li>
+        <li>
+          <b>Submitted: </b><span>{{ (thread.created_utc * 1000) | date}}</span>
+        </li>
+      </div>
+      <div>
+        <li>
+          <b>points: </b><span>{{ thread.ups }}</span>
+        </li>
+        <li>
+          <b>comments: </b><span>{{ thread.num_comments }}</span>
+        </li>
+      </div>
     </div>
   </div>
-
-  <aside *ngIf="prefetched" class="control">
-    <button (click)="reddit.getPreviousInFeed()">
-      < </button> <button (click)="reddit.getNextInFeed()"> >
-    </button>
-  </aside>
 
   <div class="main">
     <article>
@@ -55,4 +53,5 @@
       <comment *ngFor="let c of comments" [comment]='c'></comment>
     </div>
   </div>
+  
 </div>
