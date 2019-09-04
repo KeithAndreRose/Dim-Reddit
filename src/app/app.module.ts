@@ -12,6 +12,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { MarkdownParserService } from './services/markdown-parser.service';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     RedditThreadComponent,
     SafeHtmlPipe,
     SidenavComponent,
-    SidebarComponent
+    SidebarComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

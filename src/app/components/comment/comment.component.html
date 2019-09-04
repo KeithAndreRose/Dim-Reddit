@@ -1,0 +1,4 @@
+<div style="border-bottom: 1px #000 solid;">
+  <h4>{{comment.author}}</h4>
+  <div *ngIf="comment.body" [innerHTML]="comment.body_html | safeHtml"></div>
+</div>

@@ -52,10 +52,7 @@
     <div class="comments" #commentsElem>
       <h2>Comments: </h2>
       <hr>
-      <div *ngFor="let c of comments" style="border-bottom: 1px #000 solid;">
-        <h4>{{c.author}}</h4>
-        <div *ngIf="c.body" [innerHTML]="c.body_html | safeHtml"></div>
-      </div>
+      <comment *ngFor="let c of comments" [comment]='c'></comment>
     </div>
   </div>
 </div>
