@@ -1,5 +1,13 @@
-<navigation (sideNavToggle)="toggleSideNav()"></navigation>
-<sidenav></sidenav>
-<div class="route-wrapper">
-  <router-outlet></router-outlet>
+<navigation (sideNavigationEvent)="toggleSideNavigation()"></navigation>
+
+<div class="app-container">
+  <div class="sidenav-container">
+    <sidenav></sidenav>
+  </div>
+  <div class="route-container">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="sidebar-container">
+    <sidebar></sidebar>
+  </div>
 </div>

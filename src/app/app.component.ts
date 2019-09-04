@@ -9,13 +9,13 @@ import { SidenavComponent } from './shared/sidenav/sidenav.component';
 export class AppComponent implements OnInit {
   // Side Navigation Component
   @ViewChild(SidenavComponent, {static: false})
-  private sidnav: SidenavComponent;
+  private sideNavigation: SidenavComponent;
 
   constructor(){
   }
   
   ngOnInit(): void {}
 
-  toggleSideNav = () => this.sidnav.toggle()
+  toggleSideNavigation = () => this.sideNavigation.toggle()
 
 }

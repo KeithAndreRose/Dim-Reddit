@@ -1,17 +1,17 @@
 
 nav{
-  position: fixed;
-  left: 0;
+  position: relative;
+  // left: 0;
+  transform: translateX(-240px);
   top: 100px;
   background: rgba(255, 255, 255, .8);
   color: #000;
-  width: 230px;
+  width: 240px;
   border-right: #000 solid 1px;
   z-index: 5;
   display: flex;
   flex-flow: column;
   height: calc(100% - 100px);
-  transform: translateX(-230px);
   transition: transform ease 300ms;
   overflow-y: auto;
 
@@ -22,7 +22,7 @@ nav{
 hr{
   padding: 0rem .7rem;
   margin: .5rem 0;
-  border: #000 solid 1px;
+  border-bottom: rgba(0,0,0,.15) solid 1px;
   opacity: .3;
 }
 
@@ -32,7 +32,7 @@ ul{
 
   a{
     width: 100%;
-    padding: .5rem .7rem;
+    padding: .2rem .7rem;
     color: #000;
     text-decoration: none;
     &:hover{

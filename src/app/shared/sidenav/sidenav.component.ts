@@ -17,7 +17,6 @@ export class SidenavComponent implements OnInit {
       if(openState) return elem.classList.add('open')
       else return elem.classList.remove('open')
     }
-      
     elem.classList.toggle('open');
   }
 
