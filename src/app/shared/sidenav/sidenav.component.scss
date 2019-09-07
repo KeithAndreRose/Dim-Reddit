@@ -1,7 +1,7 @@
 
 nav{
   position: relative;
-  transform: translateX(-240px);
+  transform: translateX(-300px);
   background: rgba(255, 255, 255, .8);
   color: #000;
   width: 0px;
@@ -16,7 +16,7 @@ nav{
   overflow-y: auto;
 
   &.open{
-    width: 240px;
+    width: 300px;
     transform: translateX(0px);
   }
 
@@ -49,5 +49,10 @@ ul{
 @media(max-width:978px){
   nav{
     position: fixed;
+    background: rgba(255, 255, 255, 1);
+    top: 0;
+    left: 0;
+    z-index: 9;
+    
   }
 }

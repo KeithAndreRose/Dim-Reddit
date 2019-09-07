@@ -1,4 +1,7 @@
-<div style="border-bottom: 1px #000 solid;">
+<div class="comment-wrapper" [class.collapsed]="comment.collapsed" (click)="toggleCollapsed($event)">
   <h4>{{comment.author}}</h4>
   <div *ngIf="comment.body" [innerHTML]="comment.body_html | safeHtml"></div>
+  <div *ngIf="replies[0]" style="padding-left: 2px">
+    <comment *ngFor="let r of replies" [comment]="r" ></comment>
+  </div>
 </div>
