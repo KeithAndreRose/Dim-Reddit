@@ -6,6 +6,7 @@ import { Component, OnInit, Input, ElementRef } from '@angular/core';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
+  // ! DATA NEEDS TO LOOK LIKE {kind: "t1", data: {...}} or {kind: "more", data: {}}
   @Input() comment;
   replies = []
   constructor(private elRef:ElementRef) { }
@@ -17,14 +18,17 @@ export class CommentComponent implements OnInit {
     if(!this.comment.replies) return
     if(this.comment.replies === '') return
     // if(this.comment.replies.kind === "Listing") return
+
+    // ! Types smaller objects like the replies object
     const replies : Array<any> = this.comment.replies.data.children;
     console.log(replies)
+    // ! DATA NEEDS TO LOOK LIKE {kind: "t1", data: {...}} or {kind: "more", data: {}}
     if(replies[0]) replies.forEach(i => this.replies.push(i.data))
     
   }
 
   toggleCollapsed = (event:Event) => {
-    this.elRef.nativeElement.firstElementChild.classList.add(`collapsed`)
+    this.elRef.nativeElement.firstElementChild.classList.toggle(`collapsed`)
   }
 
 }

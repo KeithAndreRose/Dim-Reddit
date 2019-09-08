@@ -1,26 +1,38 @@
-.comment-wrapper{
+.comment-wrapper {
   position: relative;
   height: fit-content;
-  border-bottom: 1px #000 solid;
-  margin: 1px 0;
-  padding-left: 2px;
   transition: all 300ms ease;
+  .d1 {
+    .comment-container {
+      border-left: solid #000 2px;
+    }
+  }
+  .d2 {
+    .comment-container {
+      border-left: solid #222 2px;
+    }
+  }
+  .d3 {
+    .comment-container {
+      border-left: solid #333 2px;
+    }
+  }
 
-  &.collapsed{
-    border-top: 2px solid red;
-    height: 1px;
+  &.collapsed {
+    height: 1.7rem;
     overflow: hidden;
     border-left: 0px solid transparent;
   }
-
 }
 
-.d1{
-  border-left: solid #000 2px;
+.comment-container{
+  padding: 2px;
+  border-bottom: 1px #000 solid;
 }
-.d2{
-  border-left: solid #222 2px;
+
+.comment-body {
 }
-.d3{
-  border-left: solid #333 2px;
+
+.replies {
+  padding-left: 4px;
 }
