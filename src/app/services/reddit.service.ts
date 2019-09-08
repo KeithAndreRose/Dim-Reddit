@@ -80,6 +80,8 @@ export class RedditService {
   }
 
   // Get the [Subreddit].json/?count=[Count]&after=[lastThing]
+  // !------------------------------- \\
+  // ! FIX COLLIDING DATA POSSIBILITY \\
   queryMore() {
     if (!this.feed[0]) return
     const count = 25;

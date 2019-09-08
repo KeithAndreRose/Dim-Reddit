@@ -4,18 +4,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-work',
-  templateUrl: './work.component.html',
-  styleUrls: ['./work.component.scss']
+  selector: 'reddit-feed',
+  templateUrl: './reddit-feed.component.html',
+  styleUrls: ['./reddit-feed.component.scss']
 })
-export class WorkComponent implements OnInit, AfterViewInit {
+export class RedditFeedComponent implements OnInit, AfterViewInit {
 
   @ViewChild('feedBottom', {static: false})
   feedBottom: ElementRef<HTMLElement>;
 
+
   observer = new IntersectionObserver((e)=>{
     if(e[0].isIntersecting) this.reddit.queryMore();
   })
+  
 
   constructor(
     public reddit: RedditService,

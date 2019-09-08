@@ -1,0 +1,73 @@
+.card-wrapper{
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem auto auto;
+  height: fit-content;
+  padding: .25rem;
+  margin: 1px;
+  text-decoration: none;
+  color: #000;
+  &:hover{
+    background: rgba(0, 0, 0, .1);
+  }
+}
+
+.point-incrementer{
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  svg{
+    fill: #000;
+    width: 100%;
+  }
+  .up svg {transform: rotate(-180deg)}
+}
+
+.title-container{
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  padding: .2rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-body{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.meta-container{
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  height: fit-content;
+  span{
+    margin: 0 .1rem;
+  }
+  .subreddit, .author{
+    color: red;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+.info-container{
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.preview-container{
+  justify-self: flex-end;
+  width: 100px;
+  height: 100px;
+  background: #ddd;
+}
