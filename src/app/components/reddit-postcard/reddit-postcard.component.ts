@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MarkdownParserService } from 'src/app/services/markdown-parser.service';
-import { redditThread } from 'src/app/services/reddit.service';
+import { RedditLink } from 'src/app/models/reddit-link.model';
 
 @Component({
   selector: 'reddit-postcard',
@@ -8,12 +8,15 @@ import { redditThread } from 'src/app/services/reddit.service';
   styleUrls: ['./reddit-postcard.component.scss']
 })
 export class RedditPostcardComponent implements OnInit {
-  @Input() post:redditThread;
+  @Input() post:RedditLink;
+
+  today = new Date();
   corsProxy = (url)=> `https://cors-anywhere.herokuapp.com/${url}`;
 
   constructor(public md: MarkdownParserService) { }
 
   ngOnInit() {
+    console.log(this.post)
   }
 
 }

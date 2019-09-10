@@ -1,5 +1,7 @@
+import { RedditComment } from './../../models/reddit-comment.model';
+import { RedditLink } from './../../models/reddit-link.model';
 import { Component, OnInit, Input, HostListener, ViewChild, ElementRef } from "@angular/core";
-import { RedditService, redditThread } from "src/app/services/reddit.service";
+import { RedditService } from "src/app/services/reddit.service";
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownParserService } from 'src/app/services/markdown-parser.service';
 import { Title } from '@angular/platform-browser';
@@ -21,9 +23,9 @@ export class RedditThreadComponent implements OnInit {
 
   @Input() threadURL: string;
 
-  thread: redditThread;
-  comments = [];
-  prefetched: true;
+  thread: RedditLink;
+  comments : RedditComment[];
+  prefetched: true | RedditLink;
 
   constructor(
     public reddit: RedditService,
@@ -35,17 +37,22 @@ export class RedditThreadComponent implements OnInit {
       const subreddit = params.get('subreddit');
       const id = params.get('id');
 
-      this.prefetched = this.reddit.findInFeed(id)
+      //-------------------------------------------\
+      // If data is stored in service state, use it.
+      // 
+      this.prefetched = this.reddit.findInFeed(id) as RedditLink
       if (this.prefetched) {
-        this.thread = this.prefetched as redditThread;
+        this.thread = this.prefetched ;
         return this.fetchOnlyComments(subreddit, id);
       }
+      //-------------------------------------------------------/
       this.fetchThread(subreddit, id);
     })
 
   }
 
   ngOnInit() {
+    
   }
 
   async fetchThread(subreddit, id) {

@@ -13,6 +13,7 @@ import { MarkdownParserService } from './services/markdown-parser.service';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ThreadCommentsComponent } from './components/thread-comments/thread-comments.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CommentComponent } from './components/comment/comment.component';
     SafeHtmlPipe,
     SidenavComponent,
     SidebarComponent,
-    CommentComponent
+    CommentComponent,
+    ThreadCommentsComponent
   ],
   imports: [
     BrowserModule,

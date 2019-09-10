@@ -1,0 +1,17 @@
+.comments-wrappper {
+  width: 70%;
+}
+
+.control {
+  position: fixed;
+  right: 0;
+  padding: 1rem;
+  width: 220px;
+  z-index: 3;
+  @media(max-width:1295px){
+    &{
+      display: none;
+    }
+  }
+  
+}

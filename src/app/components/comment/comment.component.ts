@@ -1,30 +1,25 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { RedditComment } from 'src/app/models/reddit-comment.model';
 
 @Component({
   selector: 'comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent implements OnInit, AfterViewInit {
+
   // ! DATA NEEDS TO LOOK LIKE {kind: "t1", data: {...}} or {kind: "more", data: {}}
-  @Input() comment;
-  replies = []
+  @Input() comment : RedditComment;
   constructor(private elRef:ElementRef) { }
 
   ngOnInit() {
-    // console.log(this.comment)
-    const elem = this.elRef.nativeElement as HTMLElement;
-    elem.firstElementChild.classList.add(`d${this.comment.depth}`);
-    if(!this.comment.replies) return
-    if(this.comment.replies === '') return
-    // if(this.comment.replies.kind === "Listing") return
+ 
+  }
 
-    // ! Types smaller objects like the replies object
-    const replies : Array<any> = this.comment.replies.data.children;
-    console.log(replies)
-    // ! DATA NEEDS TO LOOK LIKE {kind: "t1", data: {...}} or {kind: "more", data: {}}
-    if(replies[0]) replies.forEach(i => this.replies.push(i.data))
-    
+  ngAfterViewInit(): void {
+    const comment = this.comment.data;
+    const elem = this.elRef.nativeElement as HTMLElement;
+    elem.firstElementChild.classList.add(`d${comment.depth}`);
   }
 
   toggleCollapsed = (event:Event) => {

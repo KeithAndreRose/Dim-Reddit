@@ -1,4 +1,4 @@
-<div class="thread-wrapper" *ngIf="thread">
+<div class="thread-wrapper" *ngIf="thread?.data as thread">
 
   <div class="info" #infoElem>
     <div class="points">
@@ -47,11 +47,7 @@
           resize=both></div>
       </section>
     </article>
-    <div class="comments" #commentsElem>
-      <h2>Comments: </h2>
-      <hr>
-      <comment *ngFor="let c of comments" [comment]='c'></comment>
-    </div>
+    <thread-comments *ngIf="comments" [comments]='comments'></thread-comments>
   </div>
   
 </div>

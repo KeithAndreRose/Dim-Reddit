@@ -1,22 +1,10 @@
-<!-- <a class="post-wrapper" >
-  <a class="title" [href]="post.url">{{post.title}}</a>
-  <div class="post-container">
-    <img *ngIf="post.post_hint == 'image'" [src]="post.url" alt="Post Image">
-    <img *ngIf="post.post_hint == 'link' && post.preview.thumbnail" [src]="post.thumbnail" alt="Link thumbnail">
-    <video *ngIf="post.post_hint == 'link' && post.preview.reddit_video_preview" controls>
-      <source [src]="post.preview.reddit_video_preview.fallback_url">
-    </video>
-    <img *ngIf="post.post_hint == 'hosted:video'" [src]="post.thumbnail" alt="Post Image">
-  </div>
-  <p>by:<span class="author">{{post.author}}</span></p>
-</a> -->
-
-<a class="card-wrapper" [href]="['/r/',post.subreddit,'comments',post.id]" [routerLink]="['/r/',post.subreddit,'comments',post.id]">
+<a *ngIf="post.data as post" class="card-wrapper" [href]="['/r/',post.subreddit,'comments',post.id]" [routerLink]="['/r/',post.subreddit,'comments',post.id]">
   <div class="point-incrementer">
     <span class="up">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 847 847"><g><path d="M420 723l-224 -226 142 -1 0 -351c0,-11 9,-21 21,-21l126 0c12,0 21,10 21,21l0 350 145 0 -231 228z"/></g></svg>
     </span>
-    <span>•</span>
+    <span *ngIf="!post.hide_score">{{post.score}}</span>
+    <span *ngIf="post.hide_score">•</span>
     <span class="down">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 847 847"><g><path d="M420 723l-224 -226 142 -1 0 -351c0,-11 9,-21 21,-21l126 0c12,0 21,10 21,21l0 350 145 0 -231 228z"/></g></svg>
     </span>
@@ -24,18 +12,19 @@
   <div class="card-body">
     <a class="title-container" [href]="post.url" [innerText]="post.title"></a>
     <div class="meta-container">
-      <span class="subreddit">subreddit</span>•
-      <span class="author">author</span>•
-      <span class="flair">flair</span>•
-      <span class="domain">i.domain.com</span>•
-      <span class="time">time</span>•
+      <span class="subreddit">{{post.subreddit}}</span>•
+      <span class="author">{{post.author}}</span>•
+      <span *ngIf="link_flair_text" style="background: #99c160" class="flair">flair</span><b *ngIf="link_flair_text">•</b>
+      <span *ngIf="post.domain !== ('self.'+ post.subreddit) as xDomain" class="domain">{{post.domain}}</span><b *ngIf="post.domain !== ('self.'+ post.subreddit) as xDomain">•</b>
+        <!-- TODO: CONVERT TIME PASSED PIPE-->
+      <span class="time">{{ (today - (post.created * 1000)) | date:'h:m'}}hr ago</span>
     </div>
     <div class="info-container">
       <!-- <span class="points">0000</span> -->
-      <span class="comments">0 Comments</span>
+      <span class="comments">{{post.num_comments}} Comments</span>
     </div>
   </div>
-  <div class="preview-container">
-
+  <div *ngIf="post.preview as preview" class="preview-container">
+    <img src={{preview.images[0].source.url}} alt="">
   </div>
 </a>
