@@ -14,17 +14,17 @@
     <div class="meta-container">
       <span class="subreddit">{{post.subreddit}}</span>•
       <span class="author">{{post.author}}</span>•
-      <span *ngIf="link_flair_text" style="background: #99c160" class="flair">flair</span><b *ngIf="link_flair_text">•</b>
+      <span *ngIf="post.link_flair_text" style="background: #99c160; padding: 0 2px;" class="flair">{{post.link_flair_text}}</span><b *ngIf="post.link_flair_text">•</b>
       <span *ngIf="post.domain !== ('self.'+ post.subreddit) as xDomain" class="domain">{{post.domain}}</span><b *ngIf="post.domain !== ('self.'+ post.subreddit) as xDomain">•</b>
         <!-- TODO: CONVERT TIME PASSED PIPE-->
       <span class="time">{{ (today - (post.created * 1000)) | date:'h:m'}}hr ago</span>
     </div>
     <div class="info-container">
-      <!-- <span class="points">0000</span> -->
+      <span *ngIf="post.over_18" style="padding: 0 2px; border-radius: 4px; color: red; border: red solid 2px;">NSFW</span>
       <span class="comments">{{post.num_comments}} Comments</span>
     </div>
   </div>
-  <div *ngIf="post.preview as preview" class="preview-container">
-    <img src={{preview.images[0].source.url}} alt="">
+  <div *ngIf="post.thumbnail !== 'nsfw'" class="preview-container">
+    <img src={{post.thumbnail}} alt="">
   </div>
 </a>

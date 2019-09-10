@@ -63,6 +63,11 @@
   position: relative;
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
+
+  span{
+    margin-right: .2rem;
+  }
 }
 
 .preview-container{

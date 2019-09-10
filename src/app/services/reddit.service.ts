@@ -95,10 +95,10 @@ export class RedditService {
     this.isLoading = true;
     fetch(url)
       .then(response => response.json())
-      .then(json => {
-        const items = json.data.children;
-        items.forEach(element => this.feed.push(element.data));
-        this.state['lastThing'] = items[items.length - 1].data.name;
+      .then((json:RedditListing) => {
+        const links: RedditLink[] = json.data.children as RedditLink[];
+        links.forEach(link => this.feed.push(link));
+        this.state['lastThing'] = links[links.length - 1].data.name;
         this.isLoading = false;
       });
   }
