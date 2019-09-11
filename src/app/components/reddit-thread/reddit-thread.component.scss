@@ -1,12 +1,16 @@
 .thread-wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-  height: fit-content;
+  // position: relative;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100vw;
+  height: calc(100% - 50px);
+  overflow-y: auto;
   background: #fff;
   padding: 1rem;
   display: flex;
   flex-flow: column;
+  z-index: 5;
 }
 
 .points,

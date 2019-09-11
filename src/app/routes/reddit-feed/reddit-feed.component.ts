@@ -21,24 +21,22 @@ export class RedditFeedComponent implements OnInit, AfterViewInit {
 
   constructor(
     public reddit: RedditService,
-    private router: Router,
-    private route: ActivatedRoute,
     private title:Title
-    ) {
-    this.route.paramMap.subscribe(params => {
-      const subreddits = params.get('subreddits');
-      if(!subreddits) return this.reddit.getBest();
-      this.reddit.getSubreddit(subreddits);
-      this.title.setTitle(subreddits);
-
-    })
-  }
+    ) {}
 
   ngOnInit() {
+    const state = this.reddit.state
+    const subreddit = state.route.split('/')[2]
+    if(state.lastSubreddit === 'best' && state.route.split('/')[3]) return;
+    if(!subreddit) return this.reddit.getBest()
+    console.log(subreddit)
+    this.reddit.getSubreddit(subreddit);
+    this.title.setTitle(subreddit);
   }
 
   ngAfterViewInit(): void {
     const elem = this.feedBottom.nativeElement as Element
     this.observer.observe(elem)
   }
+
 }

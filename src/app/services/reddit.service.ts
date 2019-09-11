@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { RedditListing } from '../models/reddit-listing.model';
 import { RedditLink } from '../models/reddit-link.model';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ import { RedditLink } from '../models/reddit-link.model';
 export class RedditService {
   isLoading;
   state = {
+    route: '',
     subreddit: '',
+    lastSubreddit: '',
     prefix: '',
     jsonPath: '',
     lastThing: '',
@@ -20,17 +23,26 @@ export class RedditService {
   corsProxy = (url) => `https://cors-anywhere.herokuapp.com/${url}`;
 
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private location: Location,
+    private title:Title
+    ) {
+    this.router.events.subscribe(e => {
+      const route = this.location.path()
+      this.state['route'] = route
+      if(route === '') title.setTitle('All');
+    })
   }
 
   findInFeed(id) {
-    const item = this.feed.find(post => post.id === id);
+    const item = this.feed.find((post: RedditLink) => post.data.id === id);
     if (item) this.setFeedIndex(id);
     return item
   }
 
   setFeedIndex(id) {
-    this.state['index'] = this.feed.findIndex(post => post.id === id);
+    this.state['index'] = this.feed.findIndex((post: RedditLink) => post.data.id === id);
   }
 
   getNextInFeed() {
@@ -53,10 +65,11 @@ export class RedditService {
     this.isLoading = true;
     fetch(url)
       .then(response => response.json())
-      .then((json:RedditListing) => {
+      .then((json: RedditListing) => {
         const links: RedditLink[] = json.data.children as RedditLink[];
         links.forEach(link => this.feed.push(link));
         this.state['prefix'] = 'best';
+        this.state['lastSubreddit'] = this.state['prefix'];
         this.state['subreddit'] = '';
         this.state['jsonPath'] = url;
         this.state['lastThing'] = links[links.length - 1].data.name;
@@ -68,11 +81,12 @@ export class RedditService {
   // https://www.reddit.com/r/PublicFreakout.json?count=25&after=t3_cyutpn
   // https://www.reddit.com/r/PublicFreakout/new.json
   getSubreddit(sub: string) {
+    this.state['lastSubreddit'] = sub;
     this.feed = [];
     const url = `https://www.reddit.com/r/${sub}.json?raw_json=1`
     fetch(url)
       .then(response => response.json())
-      .then((json:RedditListing) => {
+      .then((json: RedditListing) => {
         const links: RedditLink[] = json.data.children as RedditLink[];
         links.forEach(link => this.feed.push(link));
 
@@ -95,7 +109,7 @@ export class RedditService {
     this.isLoading = true;
     fetch(url)
       .then(response => response.json())
-      .then((json:RedditListing) => {
+      .then((json: RedditListing) => {
         const links: RedditLink[] = json.data.children as RedditLink[];
         links.forEach(link => this.feed.push(link));
         this.state['lastThing'] = links[links.length - 1].data.name;
@@ -107,11 +121,11 @@ export class RedditService {
     const url = `https://www.reddit.com/r/${subreddit}/comments/${id}.json?raw_json=1`;
     this.isLoading = true;
     return fetch(url).then(response => response.json())
-    .then((json: RedditListing[]) => {
-      const thread = json[0].data.children[0] as RedditLink;
-      const comments = json[1].data.children as RedditComment[];
-      this.isLoading = false;
-      return { thread, comments }
-    });
+      .then((json: RedditListing[]) => {
+        const thread = json[0].data.children[0] as RedditLink;
+        const comments = json[1].data.children as RedditComment[];
+        this.isLoading = false;
+        return { thread, comments }
+      });
   }
 }

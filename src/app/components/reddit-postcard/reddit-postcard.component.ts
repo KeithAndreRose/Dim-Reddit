@@ -16,7 +16,7 @@ export class RedditPostcardComponent implements OnInit {
   constructor(public md: MarkdownParserService) { }
 
   ngOnInit() {
-    console.log(this.post)
+    // console.log(this.post)
   }
 
 }

@@ -12,7 +12,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ["./reddit-thread.component.scss"]
 })
 export class RedditThreadComponent implements OnInit {
-  corsProxy = (url)=> `https://cors-anywhere.herokuapp.com/${url}`;
+  corsProxy = (url) => `https://cors-anywhere.herokuapp.com/${url}`;
 
   @ViewChild('infoElem', { static: false })
   infoElem: ElementRef<HTMLElement>;
@@ -24,48 +24,41 @@ export class RedditThreadComponent implements OnInit {
   @Input() threadURL: string;
 
   thread: RedditLink;
-  comments : RedditComment[];
+  comments: RedditComment[];
   prefetched: true | RedditLink;
 
   constructor(
     public reddit: RedditService,
-    private route: ActivatedRoute,
     public md: MarkdownParserService,
-    private title:Title
+    private title: Title
   ) {
-    this.route.paramMap.subscribe(params => {
-      const subreddit = params.get('subreddit');
-      const id = params.get('id');
-
-      //-------------------------------------------\
-      // If data is stored in service state, use it.
-      // 
-      this.prefetched = this.reddit.findInFeed(id) as RedditLink
-      if (this.prefetched) {
-        this.thread = this.prefetched ;
-        return this.fetchOnlyComments(subreddit, id);
-      }
-      //-------------------------------------------------------/
-      this.fetchThread(subreddit, id);
-    })
-
   }
-
+  
   ngOnInit() {
-    
+    const route = this.reddit.state.route;
+    const subreddit = route.split('/')[2]
+    const id = route.split('/')[4]
+    console.log({subreddit, id})
+
+    this.prefetched = this.reddit.findInFeed(id) as RedditLink
+    if (this.prefetched) {
+      this.thread = this.prefetched;
+      this.fetchOnlyComments(subreddit, id);
+    } 
+    else this.fetchThread(subreddit, id)
   }
 
   async fetchThread(subreddit, id) {
     const fetch = await this.reddit.getThread(subreddit, id);
     this.thread = fetch.thread;
     this.comments = fetch.comments;
-    this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
+    this.title.setTitle(this.thread.data['title']);
   }
 
   async fetchOnlyComments(subreddit, id) {
+    this.title.setTitle(this.thread.data['title']);
     const fetch = await this.reddit.getThread(subreddit, id);
     this.comments = fetch.comments;
-    this.title.setTitle(`r/${this.thread['subreddit']} | ${this.thread['title']}`);
   }
 
   toggleInfoElemLock(isIntersecting) {
