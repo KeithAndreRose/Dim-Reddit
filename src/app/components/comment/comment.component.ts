@@ -13,6 +13,7 @@ export class CommentComponent implements OnInit, AfterViewInit {
   constructor(private elRef:ElementRef) { }
 
   ngOnInit() {
+    console.log(this.comment)
  
   }
 

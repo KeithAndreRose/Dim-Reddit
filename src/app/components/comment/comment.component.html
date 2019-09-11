@@ -1,4 +1,4 @@
-<div *ngIf="comment.data as comment" class="comment-wrapper" [class.collapsed]="comment.collapsed">
+<div *ngIf="comment.kind === 't1' && comment.data as comment else more" class="comment-wrapper" [class.collapsed]="comment.collapsed">
   <div class="comment-container" (click)="toggleCollapsed($event)">
     <h4 class="author">{{comment.author}}</h4>
     <div *ngIf="comment.body" class="comment-body" [innerHTML]="comment.body_html | safeHtml"></div>
@@ -7,3 +7,8 @@
     <comment *ngFor="let r of replies" [comment]="r" ></comment>
   </div>
 </div>
+<ng-template #more class="comment-wrapper" >
+  <div class="comment-container">
+    <h4>Load more comments</h4>
+  </div>
+</ng-template>

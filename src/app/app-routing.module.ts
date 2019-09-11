@@ -11,12 +11,7 @@ const routes: Routes = [
     path: 'r/:subreddits', component: RedditFeedComponent,
     children: [
       {
-        path: 'comments/:id', component: RedditThreadComponent,
-        children: [
-          { path: '', component: ThreadCommentsComponent, pathMatch: 'full' },
-          { path: ':commentId', component: ThreadCommentsComponent,},
-          { path: '**', redirectTo: '' }
-        ]
+        path: 'comments/:id', component: RedditThreadComponent
       },
     ]
   },

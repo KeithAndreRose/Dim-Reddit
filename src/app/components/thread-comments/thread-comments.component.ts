@@ -16,10 +16,15 @@ export class ThreadCommentsComponent implements OnInit, OnDestroy {
   parameters: Subscription;
 
   constructor(private reddit: RedditService) {
+    
   }
   
   ngOnInit() {
     // TODO: Get thread name and comment context from route
+    const id = this.reddit.state.route.split('/')[5]
+    console.log(id)
+    if(id) console.log("Viewing replies of", id)
+    else console.log("Viewing surface level comments")
   }
 
   ngOnDestroy() {
